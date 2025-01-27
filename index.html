@@ -1,0 +1,1339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Tags -->
+    <title>xDill - Digital Portfolio & Crypto Updates</title>
+    <meta name="description" content="Dapatkan informasi terkini tentang cryptocurrency, berita crypto, dan analisis pasar digital dalam satu platform.">
+    <meta name="keywords" content="crypto, cryptocurrency, bitcoin, blockchain, digital portfolio">
+    <meta name="author" content="xDill">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:title" content="xDill - Digital Portfolio & Crypto Updates">
+    <meta property="og:description" content="Platform informasi cryptocurrency terkini dengan berita dan analisis pasar digital.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yourdomain.com">
+    <meta property="og:image" content="/images/og-image.jpg">
+    
+    <!-- PWA Support -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#2196F3">
+    <link rel="apple-touch-icon" href="/images/icons/icon-192x192.png">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    
+    <!-- Existing CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+    <script src="config.js"></script>
+
+    <!-- Progress Bar Style -->
+    <style>
+        :root {
+            --primary: #2196F3;
+            --secondary: #ffffff;
+            --bg: #f5f5f5;
+            --text: #2d3436;
+            --accent: #0984e3;
+            --card-bg: white;
+            --card-text: #333;
+            --card-meta: #666;
+        }
+
+        [data-theme="dark"] {
+            --primary: #1976D2;
+            --secondary: #121212;
+            --bg: #1E1E1E;
+            --text: #dfe6e9;
+            --accent: #74b9ff;
+            --card-bg: #2d3436;
+            --card-text: #ffffff;
+            --card-meta: #b2bec3;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Landing Page */
+        .landing {
+            padding-top: 120px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            text-align: center;
+            background: linear-gradient(-45deg, #2196F3, #0984e3, #00b894, #00cec9);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+        }
+
+        .welcome-text {
+            margin-top: 0;
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            color: white;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .welcome-subtitle {
+            font-size: 1.8rem;
+            margin-bottom: 2.5rem;
+            color: rgba(255, 255, 255, 0.9);
+            animation: fadeInUp 1s ease-out 0.3s backwards;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            z-index: 1;
+        }
+
+        .cta-button {
+            padding: 1rem 2.5rem;
+            background: rgba(255,255,255,0.9);
+            color: var(--primary);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            background: white;
+        }
+
+        .blog-button {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            padding: 1rem 2rem;
+            background: var(--primary);
+            color: white;
+            border-radius: 50px;
+            text-decoration: none;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        /* Konten Utama */
+        #main-content {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: contentFade 0.8s 1s forwards;
+            margin-top: 60px;
+            min-height: calc(100vh - 60px);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            padding: 20px 0;
+        }
+
+        @keyframes shine {
+            0% { left: -100%; }
+            100% { left: 200%; }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes contentFade {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Perbaikan Layout Konten */
+        .section h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid var(--primary);
+            display: inline-block;
+            color: white;
+            border-bottom: 3px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .crypto-card {
+            background: var(--secondary);
+            padding: 1.5rem;
+            border-radius: 15px;
+            border-left: 4px solid var(--primary);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .crypto-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .news-card {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            color: var(--card-text);
+        }
+
+        .news-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .news-card-content {
+            padding: 0;
+        }
+
+        .news-card-title {
+            color: var(--card-text);
+            font-size: 1.2rem;
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+        }
+
+        .news-card-excerpt {
+            color: var(--card-meta);
+            margin-bottom: 1rem;
+        }
+
+        .news-card-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: var(--card-meta);
+        }
+
+        .news-card-meta a {
+            color: var(--primary);
+            text-decoration: none;
+            padding: 5px 15px;
+            border-radius: 50px;
+            background: rgba(33, 150, 243, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .news-card-meta a:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Loading State */
+        .loading {
+            display: flex;
+            justify-content: center;
+            padding: 2rem;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                height: 50px;
+                padding: 0 1rem;
+            }
+
+            .landing {
+                padding-top: 80px;
+            }
+
+            .welcome-text {
+                font-size: 2rem;
+                margin-top: 1rem;
+            }
+
+            .welcome-subtitle {
+                font-size: 1.2rem;
+                margin-top: 0.5rem;
+            }
+
+            .cta-button {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header {
+                height: 45px;
+                padding: 0 1rem;
+            }
+
+            .landing {
+                padding-top: 70px;
+            }
+
+            .welcome-text {
+                font-size: 1.8rem;
+                padding: 0 1rem;
+                margin-top: 1.5rem;
+            }
+
+            .container {
+                padding: 0.8rem;
+            }
+
+            .section {
+                margin-bottom: 2rem;
+            }
+
+            .skeleton-card {
+                height: 150px;
+            }
+        }
+
+        /* Main Content Spacing */
+        #main-content {
+            margin-top: 60px; /* Header height + extra space */
+            min-height: 100vh;
+        }
+
+        .section {
+            margin-bottom: 3rem;
+            padding: 1rem;
+            background: transparent;
+            backdrop-filter: none;
+            border-radius: 15px;
+        }
+
+        .section h2 {
+            color: white;
+            border-bottom: 3px solid rgba(255, 255, 255, 0.3);
+        }
+
+        /* Card Content Layout */
+        .news-card-content, .crypto-card-content {
+            padding: 1rem;
+        }
+
+        .news-card-title, .crypto-card-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+        }
+
+        .news-card-meta, .crypto-card-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Loading States for Different Screens */
+        .skeleton-card {
+            @media (min-width: 769px) {
+                height: 200px;
+            }
+            @media (max-width: 768px) {
+                height: 180px;
+            }
+            @media (max-width: 480px) {
+                height: 150px;
+            }
+        }
+
+        /* Perbaikan untuk menghilangkan bagian putih */
+        .section {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .crypto-card, .news-card {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        .crypto-card-title, .news-card-title {
+            color: white;
+        }
+
+        .news-card-excerpt {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .news-card-meta a {
+            color: white;
+            text-decoration: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .news-card-meta a:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .whatsapp-button {
+            padding: 1.2rem 3rem;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            background: #25D366;
+            color: white;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+            transition: all 0.3s ease;
+            animation: fadeInUp 1s ease-out 0.6s backwards;
+        }
+
+        .whatsapp-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+            background: #22c35e;
+            animation: pulse 2s infinite;
+        }
+
+        /* Perbaikan Group Description */
+        .group-description {
+            max-width: 900px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 3rem;
+            margin: 0 auto;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: fadeInUp 1s ease-out 0.9s backwards;
+        }
+
+        .description-text {
+            font-size: 1.4rem;
+            color: white;
+            margin-bottom: 2rem;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .benefits-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .benefits-list li {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 1.1rem;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0;
+            transform: translateX(-30px);
+        }
+
+        .benefits-list i {
+            color: #4CAF50;
+            font-size: 1.4rem;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.8rem;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        .highlight-text {
+            font-size: 1.3rem;
+            background: rgba(76, 175, 80, 0.2);
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin-top: 2rem;
+            text-align: center;
+            border: 1px solid rgba(76, 175, 80, 0.3);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .landing {
+                padding: 2rem 1rem;
+            }
+
+            .welcome-text {
+                font-size: 2.5rem;
+            }
+
+            .welcome-subtitle {
+                font-size: 1.4rem;
+            }
+
+            .whatsapp-button {
+                padding: 1rem 2rem;
+                font-size: 1.1rem;
+                width: 90%;
+                justify-content: center;
+            }
+
+            .group-description {
+                padding: 1.5rem;
+                margin: 0 1rem;
+            }
+
+            .description-text {
+                font-size: 1.2rem;
+            }
+
+            .benefits-list {
+                grid-template-columns: 1fr;
+            }
+
+            .benefits-list li {
+                padding: 1.2rem;
+                font-size: 1rem;
+            }
+
+            .highlight-text {
+                font-size: 1.1rem;
+                padding: 1.2rem;
+            }
+        }
+
+        /* Perbaikan Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            padding: 0 2rem;
+            background: rgba(33, 150, 243, 0.95);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: white;
+        }
+
+        .logo i {
+            font-size: 1.3rem;
+        }
+
+        .header-buttons {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .header-button {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1rem;
+            border: none;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            cursor: pointer;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .header-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-1px);
+        }
+
+        .primary-button {
+            background: var(--primary);
+            border: none;
+        }
+
+        .primary-button:hover {
+            background: var(--accent);
+        }
+
+        .theme-button {
+            padding: 0.6rem;
+        }
+
+        /* Progress Bar */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: rgba(255,255,255,0.1);
+            z-index: 1001;
+        }
+
+        .progress {
+            width: 0%;
+            height: 100%;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        /* Skeleton Loading */
+        .skeleton {
+            background: linear-gradient(90deg, 
+                rgba(255, 255, 255, 0.1) 25%, 
+                rgba(255, 255, 255, 0.2) 50%, 
+                rgba(255, 255, 255, 0.1) 75%);
+            background-size: 200% 100%;
+            animation: skeleton-loading 1.5s infinite;
+        }
+
+        .skeleton-card {
+            height: 200px;
+            border-radius: 15px;
+            margin-bottom: 1rem;
+        }
+
+        @keyframes skeleton-loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        /* Container dan Grid System */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .news-grid, .crypto-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        /* Card Styles */
+        .news-card, .crypto-card {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        /* Z-index Adjustments */
+        .header { z-index: 1000; }
+        .progress-bar { z-index: 1001; }
+        .blog-button { z-index: 999; }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .container {
+                padding: 1.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .header {
+                padding: 0.8rem 1rem;
+            }
+
+            .logo span {
+                font-size: 1.2rem;
+            }
+
+            .header-buttons {
+                gap: 0.4rem;
+            }
+
+            .header-button {
+                padding: 0.5rem;
+            }
+
+            .header-button span {
+                display: none;
+            }
+
+            .header-button i {
+                font-size: 1.1rem;
+                margin: 0;
+            }
+
+            .primary-button {
+                padding: 0.5rem;
+            }
+
+            .welcome-text {
+                font-size: 2rem;
+                padding: 0 1rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                width: 100%;
+                padding: 0 1rem;
+            }
+
+            .cta-button {
+                width: 100%;
+                margin: 0.5rem 0;
+            }
+
+            .news-grid, .crypto-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .section h2 {
+                font-size: 1.5rem;
+            }
+
+            .blog-button {
+                bottom: 1rem;
+                right: 1rem;
+                padding: 0.8rem 1.5rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header {
+                padding: 0.6rem;
+            }
+
+            .logo {
+                font-size: 1.2rem;
+            }
+
+            .header-buttons {
+                gap: 0.3rem;
+            }
+
+            .header-button {
+                padding: 0.3rem 0.5rem;
+                font-size: 0.8rem;
+            }
+
+            .welcome-text {
+                font-size: 1.8rem;
+            }
+
+            .container {
+                padding: 0.8rem;
+            }
+
+            .section {
+                margin-bottom: 2rem;
+            }
+
+            .skeleton-card {
+                height: 150px;
+            }
+        }
+
+        /* Language Selector Styles */
+        .language-dropdown {
+            position: relative;
+        }
+
+        .lang-text {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .selected-lang {
+            font-weight: 500;
+        }
+
+        .language-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            margin-top: 0.5rem;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            display: none;
+            min-width: 160px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .language-menu.show {
+            display: block;
+            animation: fadeIn 0.2s ease;
+        }
+
+        .lang-option {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: none;
+            background: none;
+            color: #333;
+            cursor: pointer;
+            font-size: 0.95rem;
+            text-align: left;
+            transition: background 0.2s ease;
+        }
+
+        .lang-option:hover {
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        .flag-icon {
+            width: 24px;
+            height: 18px;
+            object-fit: cover;
+            border-radius: 2px;
+        }
+
+        /* Dark mode adjustments */
+        [data-theme="dark"] .language-menu {
+            background: rgba(30, 30, 30, 0.95);
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        [data-theme="dark"] .lang-option {
+            color: #fff;
+        }
+
+        [data-theme="dark"] .lang-option:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            .language-menu {
+                position: fixed;
+                top: 60px;
+                right: 10px;
+                margin-top: 0;
+            }
+
+            .lang-option {
+                padding: 0.7rem 1rem;
+            }
+        }
+
+        /* Animasi untuk Landing Page */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        /* Styling dengan Animasi */
+        .landing {
+            background: linear-gradient(-45deg, #2196F3, #0984e3, #00b894, #00cec9);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+        }
+
+        .welcome-text {
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .welcome-subtitle {
+            animation: fadeInUp 1s ease-out 0.3s backwards;
+        }
+
+        .whatsapp-button {
+            animation: fadeInUp 1s ease-out 0.6s backwards;
+        }
+
+        .whatsapp-button:hover {
+            animation: pulse 2s infinite;
+        }
+
+        .group-description {
+            animation: fadeInUp 1s ease-out 0.9s backwards;
+        }
+
+        .benefits-list li {
+            opacity: 0;
+            transform: translateX(-30px);
+        }
+
+        .benefits-list li:nth-child(1) { animation: fadeInRight 0.5s ease-out 1.2s forwards; }
+        .benefits-list li:nth-child(2) { animation: fadeInRight 0.5s ease-out 1.4s forwards; }
+        .benefits-list li:nth-child(3) { animation: fadeInRight 0.5s ease-out 1.6s forwards; }
+        .benefits-list li:nth-child(4) { animation: fadeInRight 0.5s ease-out 1.8s forwards; }
+        .benefits-list li:nth-child(5) { animation: fadeInRight 0.5s ease-out 2.0s forwards; }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .highlight-text {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* Animasi untuk Icon */
+        .benefits-list i {
+            animation: pulse 2s infinite;
+        }
+
+        /* Particle Background */
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .particle {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            animation: moveParticle 15s infinite linear;
+        }
+
+        @keyframes moveParticle {
+            0% {
+                transform: translateY(0) translateX(0);
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-1000px) translateX(500px);
+                opacity: 0;
+            }
+        }
+
+        /* Responsive Animations */
+        @media (max-width: 768px) {
+            .landing {
+                background-size: 200% 200%;
+            }
+
+            .benefits-list li {
+                animation-duration: 0.3s;
+            }
+
+            .particle {
+                width: 3px;
+                height: 3px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Progress Bar -->
+    <div class="progress-bar">
+        <div class="progress" id="progressBar"></div>
+    </div>
+
+    <!-- Header Baru -->
+    <header class="header">
+        <div class="logo">
+            <span>xDill</span>
+        </div>
+        <div class="header-buttons">
+            <button class="header-button primary-button" onclick="showSection('news')">
+                <i class="fas fa-newspaper"></i>
+                <span>Crypto News</span>
+            </button>
+            <a href="blog.html" class="header-button">
+                <i class="fas fa-blog"></i>
+                <span>Blog</span>
+            </a>
+            <div class="language-dropdown">
+                <button class="header-button" onclick="toggleLanguageMenu()">
+                    <i class="fas fa-globe"></i>
+                    <span class="lang-text">
+                        <span class="selected-lang">ID</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </span>
+                </button>
+                <div class="language-menu" id="languageMenu">
+                    <button class="lang-option" onclick="changeLanguage('id')">
+                        <img src="https://flagcdn.com/24x18/id.png" alt="Indonesia" class="flag-icon">
+                        <span>Indonesia</span>
+                    </button>
+                    <button class="lang-option" onclick="changeLanguage('en')">
+                        <img src="https://flagcdn.com/24x18/gb.png" alt="English" class="flag-icon">
+                        <span>English</span>
+                    </button>
+                </div>
+            </div>
+            <button class="header-button theme-button" onclick="toggleTheme()">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Landing Page -->
+    <section class="landing">
+        <div class="particles">
+            <!-- Particles akan ditambahkan via JavaScript -->
+        </div>
+        <h1 class="welcome-text" data-translate="welcome">Innovate • Create • Inspire</h1>
+        <p class="welcome-subtitle" data-translate="welcomeSubtitle">Selamat Datang di Crypto Catcher</p>
+        <a href="https://chat.whatsapp.com/DmSKtLW0ZH4IHlPh78H0xl" 
+           class="whatsapp-button" 
+           data-translate="whatsappBtn"
+           data-action="share/whatsapp/share">
+            <i class="fab fa-whatsapp"></i> Bergabung ke Grup WhatsApp Crypto Catcher
+        </a>
+        <div class="group-description">
+            <p class="description-text" data-translate="joinCommunity">
+                Bergabunglah dengan komunitas kami dan dapatkan:
+            </p>
+            <ul class="benefits-list">
+                <li>
+                    <i class="fas fa-check-circle"></i>
+                    <span data-translate="benefit1">Informasi terkini seputar cryptocurrency dan investasi</span>
+                </li>
+                <li>
+                    <i class="fas fa-check-circle"></i>
+                    <span data-translate="benefit2">Diskusi interaktif dengan sesama investor dan trader</span>
+                </li>
+                <li>
+                    <i class="fas fa-check-circle"></i>
+                    <span data-translate="benefit3">Pembelajaran mendalam tentang crypto, saham, dan investasi lainnya</span>
+                </li>
+                <li>
+                    <i class="fas fa-check-circle"></i>
+                    <span data-translate="benefit4">Update peluang airdrop dan passive income</span>
+                </li>
+                <li>
+                    <i class="fas fa-check-circle"></i>
+                    <span data-translate="benefit5">Networking dengan para praktisi investasi</span>
+                </li>
+            </ul>
+            <p class="highlight-text" data-translate="freeGroup">
+                💯 Grup 100% GRATIS! Dibuat untuk belajar dan berkembang bersama.
+            </p>
+        </div>
+    </section>
+
+    <!-- Konten Utama -->
+    <div class="hidden" id="main-content">
+        <div class="container">
+            <div class="section">
+                <h2 data-translate="news">📰 Crypto News</h2>
+                <div class="news-grid" id="news-container">
+                    <!-- Manual Crypto News -->
+                    <div class="news-card">
+                        <div class="news-card-content">
+                            <h3 class="news-card-title">Bitcoin Hits New All-Time High</h3>
+                            <p class="news-card-excerpt">Bitcoin reaches unprecedented levels as institutional adoption continues to grow.</p>
+                            <div class="news-card-meta">
+                                <span>March 14, 2024</span>
+                                <a href="#" target="_blank" rel="noopener noreferrer">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="news-card">
+                        <div class="news-card-content">
+                            <h3 class="news-card-title">Ethereum 2.0 Update Successfully Launched</h3>
+                            <p class="news-card-excerpt">The long-awaited Ethereum upgrade brings improved scalability and reduced energy consumption.</p>
+                            <div class="news-card-meta">
+                                <span>March 13, 2024</span>
+                                <a href="#" target="_blank" rel="noopener noreferrer">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="news-card">
+                        <div class="news-card-content">
+                            <h3 class="news-card-title">DeFi Market Reaches $100B Total Value Locked</h3>
+                            <p class="news-card-excerpt">Decentralized Finance continues to grow as more users adopt blockchain-based financial services.</p>
+                            <div class="news-card-meta">
+                                <span>March 12, 2024</span>
+                                <a href="#" target="_blank" rel="noopener noreferrer">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const translations = {
+            en: {
+                welcome: "Innovate • Create • Inspire",
+                welcomeSubtitle: "Welcome to Crypto Catcher",
+                newsBtn: "Crypto News",
+                blogBtn: "Blog",
+                news: "Crypto News",
+                whatsappBtn: "Join Crypto Catcher WhatsApp Group",
+                joinCommunity: "Join our community and get:",
+                benefit1: "Latest information about cryptocurrency and investment",
+                benefit2: "Interactive discussions with fellow investors and traders",
+                benefit3: "In-depth learning about crypto, stocks, and other investments",
+                benefit4: "Updates on airdrop opportunities and passive income",
+                benefit5: "Networking with investment practitioners",
+                freeGroup: "💯 100% FREE Group! Created for learning and growing together."
+            },
+            id: {
+                welcome: "Inovasi • Kreasi • Inspirasi",
+                welcomeSubtitle: "Selamat Datang di Crypto Catcher",
+                newsBtn: "Berita Crypto",
+                blogBtn: "Blog",
+                news: "Berita Crypto",
+                whatsappBtn: "Bergabung ke Grup WhatsApp Crypto Catcher",
+                joinCommunity: "Bergabunglah dengan komunitas kami dan dapatkan:",
+                benefit1: "Informasi terkini seputar cryptocurrency dan investasi",
+                benefit2: "Diskusi interaktif dengan sesama investor dan trader",
+                benefit3: "Pembelajaran mendalam tentang crypto, saham, dan investasi lainnya",
+                benefit4: "Update peluang airdrop dan passive income",
+                benefit5: "Networking dengan para praktisi investasi",
+                freeGroup: "💯 Grup 100% GRATIS! Dibuat untuk belajar dan berkembang bersama."
+            }
+        };
+
+        let currentLanguage = 'id';
+
+        function showSection(sectionName) {
+            const mainContent = document.getElementById('main-content');
+            mainContent.style.opacity = '0';
+            mainContent.style.transform = 'translateY(20px)';
+            
+            setTimeout(() => {
+                mainContent.classList.remove('hidden');
+                requestAnimationFrame(() => {
+                    mainContent.style.opacity = '1';
+                    mainContent.style.transform = 'translateY(0)';
+                });
+                mainContent.scrollIntoView({ behavior: 'smooth' });
+            }, 300);
+        }
+
+        function toggleLanguage() {
+            currentLanguage = currentLanguage === 'en' ? 'id' : 'en';
+            updateTranslations();
+        }
+
+        function updateTranslations() {
+            document.querySelectorAll('[data-translate]').forEach(element => {
+                const key = element.dataset.translate;
+                if (translations[currentLanguage][key]) {
+                    element.textContent = translations[currentLanguage][key];
+                }
+            });
+        }
+
+        // Fungsi untuk toggle theme
+        function toggleTheme() {
+            const body = document.body;
+            const currentTheme = body.getAttribute('data-theme');
+            
+            if (currentTheme === 'dark') {
+                body.removeAttribute('data-theme');
+                localStorage.setItem('theme', 'light');
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        // Fungsi untuk mengatur theme berdasarkan preferensi yang tersimpan
+        function setInitialTheme() {
+            const savedTheme = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            
+            if (savedTheme) {
+                if (savedTheme === 'dark') {
+                    document.body.setAttribute('data-theme', 'dark');
+                }
+            } else if (prefersDark) {
+                document.body.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        // Panggil fungsi saat halaman dimuat
+        document.addEventListener('DOMContentLoaded', () => {
+            setInitialTheme();
+            updateTranslations();
+        });
+
+        function toggleLanguageMenu() {
+            const menu = document.getElementById('languageMenu');
+            menu.classList.toggle('show');
+        }
+
+        function changeLanguage(lang) {
+            currentLanguage = lang;
+            const selectedLang = document.querySelector('.selected-lang');
+            selectedLang.textContent = lang.toUpperCase();
+            updateTranslations();
+            toggleLanguageMenu();
+        }
+
+        // Tutup menu bahasa ketika mengklik di luar menu
+        document.addEventListener('click', function(event) {
+            const dropdown = document.querySelector('.language-dropdown');
+            const menu = document.getElementById('languageMenu');
+            if (!dropdown.contains(event.target) && menu.classList.contains('show')) {
+                menu.classList.remove('show');
+            }
+        });
+
+        // Update initial language display
+        document.addEventListener('DOMContentLoaded', () => {
+            setInitialTheme();
+            updateTranslations();
+            document.getElementById('currentLang').textContent = currentLanguage.toUpperCase();
+        });
+
+        // Tambahkan fungsi untuk mengubah ikon theme
+        function updateThemeIcon() {
+            const themeButton = document.querySelector('.theme-button i');
+            const isDark = document.body.getAttribute('data-theme') === 'dark';
+            themeButton.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
+        }
+
+        // Update fungsi toggleTheme
+        function toggleTheme() {
+            const body = document.body;
+            const currentTheme = body.getAttribute('data-theme');
+            
+            if (currentTheme === 'dark') {
+                body.removeAttribute('data-theme');
+                localStorage.setItem('theme', 'light');
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+            }
+            updateThemeIcon();
+        }
+
+        // Update fungsi setInitialTheme
+        function setInitialTheme() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                document.body.setAttribute('data-theme', 'dark');
+            }
+            updateThemeIcon();
+        }
+
+        // Fungsi untuk menambahkan particles
+        function createParticles() {
+            const particlesContainer = document.querySelector('.particles');
+            const particleCount = window.innerWidth > 768 ? 50 : 30;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                
+                // Random position
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                
+                // Random animation delay
+                particle.style.animationDelay = Math.random() * 15 + 's';
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Panggil fungsi saat halaman dimuat
+        document.addEventListener('DOMContentLoaded', () => {
+            createParticles();
+            setInitialTheme();
+            updateTranslations();
+        });
+
+        // Recreate particles on resize
+        let resizeTimeout;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => {
+                const particlesContainer = document.querySelector('.particles');
+                particlesContainer.innerHTML = '';
+                createParticles();
+            }, 250);
+        });
+
+        // Tambahkan fungsi untuk memastikan link WhatsApp selalu tersedia
+        document.addEventListener('DOMContentLoaded', () => {
+            const whatsappButton = document.querySelector('.whatsapp-button');
+            whatsappButton.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = 'https://chat.whatsapp.com/DmSKtLW0ZH4IHlPh78H0xl';
+            });
+        });
+    </script>
+</body>
+</html>

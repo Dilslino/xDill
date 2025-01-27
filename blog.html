@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto Catcher Blog</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2196F3;
+            --accent: #0984e3;
+            --bg: linear-gradient(135deg, #2196F3 0%, #0984e3 100%);
+            --card-bg: rgba(255, 255, 255, 0.1);
+            --text: white;
+            --meta: rgba(255, 255, 255, 0.8);
+        }
+
+        [data-theme="dark"] {
+            --primary: #1976D2;
+            --accent: #74b9ff;
+            --bg: linear-gradient(135deg, #1a1a1a 0%, #2d3436 100%);
+            --card-bg: rgba(0, 0, 0, 0.5);
+            --text: #dfe6e9;
+            --meta: rgba(223, 230, 233, 0.8);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 1rem 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+        }
+
+        .header-button {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: white;
+            cursor: pointer;
+        }
+
+        /* Blog Content */
+        .blog-container {
+            max-width: 800px;
+            margin: 100px auto 40px;
+            padding: 20px;
+        }
+
+        .blog-post {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .blog-post h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .blog-meta {
+            font-size: 0.9rem;
+            color: var(--meta);
+            margin-bottom: 1rem;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .blog-content {
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .read-more {
+            display: inline-block;
+            margin-top: 1rem;
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .read-more:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .blog-container {
+                padding: 15px;
+            }
+
+            .blog-post {
+                padding: 1.5rem;
+            }
+
+            .blog-post h2 {
+                font-size: 1.5rem;
+            }
+        }
+
+        /* Perbaikan untuk mode gelap */
+        [data-theme="dark"] .blog-post {
+            background: #1a1a1a;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        [data-theme="dark"] .header {
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        [data-theme="dark"] .read-more {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        [data-theme="dark"] .read-more:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Perbaikan Header Mobile */
+        @media (max-width: 768px) {
+            .header {
+                padding: 0.8rem;
+            }
+
+            .logo {
+                font-size: 1.2rem;
+            }
+
+            .header-button {
+                padding: 0.4rem 0.6rem;
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header {
+                padding: 0.6rem;
+            }
+
+            .logo {
+                font-size: 1.1rem;
+            }
+
+            .header-button {
+                padding: 0.3rem 0.5rem;
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="index.html" class="logo">xDill</a>
+        <button class="header-button" onclick="toggleTheme()">🌓</button>
+    </header>
+
+    <div class="blog-container">
+        <article class="blog-post">
+            <h2>Memahami Dasar Cryptocurrency</h2>
+            <div class="blog-meta">
+                <span><i class="far fa-calendar"></i> 14 Maret 2024</span>
+                <span><i class="far fa-user"></i> Admin</span>
+            </div>
+            <div class="blog-content">
+                <p>Cryptocurrency adalah mata uang digital yang menggunakan teknologi blockchain untuk keamanan dan transparansi transaksi...</p>
+                <a href="#" class="read-more">Baca Selengkapnya</a>
+            </div>
+        </article>
+
+        <article class="blog-post">
+            <h2>Tips Trading Crypto untuk Pemula</h2>
+            <div class="blog-meta">
+                <span><i class="far fa-calendar"></i> 13 Maret 2024</span>
+                <span><i class="far fa-user"></i> Admin</span>
+            </div>
+            <div class="blog-content">
+                <p>Bagi pemula yang ingin memulai trading cryptocurrency, penting untuk memahami beberapa hal dasar...</p>
+                <a href="#" class="read-more">Baca Selengkapnya</a>
+            </div>
+        </article>
+
+        <article class="blog-post">
+            <h2>Analisis Market Crypto Minggu Ini</h2>
+            <div class="blog-meta">
+                <span><i class="far fa-calendar"></i> 12 Maret 2024</span>
+                <span><i class="far fa-user"></i> Admin</span>
+            </div>
+            <div class="blog-content">
+                <p>Market cryptocurrency minggu ini menunjukkan tren bullish dengan Bitcoin mencapai all-time high baru...</p>
+                <a href="#" class="read-more">Baca Selengkapnya</a>
+            </div>
+        </article>
+    </div>
+
+    <script>
+        function toggleTheme() {
+            const body = document.body;
+            const currentTheme = body.getAttribute('data-theme');
+            
+            if (currentTheme === 'dark') {
+                body.removeAttribute('data-theme');
+                localStorage.setItem('theme', 'light');
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        function setInitialTheme() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                document.body.setAttribute('data-theme', 'dark');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', setInitialTheme);
+    </script>
+</body>
+</html> 
